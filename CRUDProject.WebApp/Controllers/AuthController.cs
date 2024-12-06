@@ -41,6 +41,9 @@ namespace CRUDProject.WebApp.Controllers
 
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, claimsPrincipal, prop);
                 Response.Cookies.Append("isActive", user.IsActive.ToString(), new CookieOptions() { Expires = DateTimeOffset.Now.AddHours(2) });
+
+
+                Response.Cookies.Append("profileImage", user.ImagePath);
                 return RedirectToAction("Index", "Home");
             }
             return RedirectToAction("Index");

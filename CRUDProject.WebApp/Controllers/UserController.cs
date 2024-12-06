@@ -56,6 +56,8 @@ namespace CRUDProject.WebApp.Controllers
                 }
                 await _userService.UpdateAsync(user);
                 var claimsIden = HttpContext.User.Identity as ClaimsIdentity;
+                Response.Cookies.Delete("profileImage");
+                Response.Cookies.Append("profileImage", user.ImagePath);
                 claimsIden.RemoveClaim(claimsIden.FindFirst(x => x.Type == "image"));
                 claimsIden.AddClaim(new Claim("image", user.ImagePath));
             }
